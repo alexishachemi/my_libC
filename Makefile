@@ -45,6 +45,7 @@ SRC		=	vfstr/my_vfstr.c\
 			warr/warr_to_str.c\
 			math/math_compute.c\
 			math/math_prime.c\
+			math/math_v2.c\
 			io/io_printf.c\
 			io/io_putc.c\
 			io/io_putnb.c\
