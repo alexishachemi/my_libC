@@ -1,89 +1,98 @@
 ##
 ## EPITECH PROJECT, 2023
-## Makefile
+## my_libC
 ## File description:
-## makefile
+## Makefile
 ##
 
-NAME	=	a.out
+NAME	=	mylib
 
-# Main
+MNAME	=	$(NAME)_main
 
-MAIN	=	src/main.c
+LNAME 	= 	lib$(NAME).a
 
-TMAIN	=	tests/test_main.c
+CFLAGS 	+= -I./include/ -W -Wall -Wextra -pedantic
 
-# Sources
+TFLAGS	= -lcriterion --coverage -g3
 
-SRC	=
+SRC		=	vfstr/my_vfstr.c\
+			vfstr/flags/base_conv_flags.c\
+			vfstr/flags/char_conv_flags.c\
+			vfstr/flags/number_conv_flags.c\
+			list/list_create.c\
+			list/list_handle.c\
+			str/str_alloc.c\
+			str/str_alnum.c\
+			str/str_case.c\
+			str/str_clean.c\
+			str/str_contains.c\
+			str/str_copy.c\
+			str/str_count.c\
+			str/str_double.c\
+			str/str_extract.c\
+			str/str_find.c\
+			str/str_fix.c\
+			str/str_format.c\
+			str/str_handle.c\
+			str/str_merge.c\
+			str/str_nb.c\
+			str/str_replace.c\
+			warr/warr_alloc.c\
+			warr/warr_handle.c\
+			warr/warr_from_str.c\
+			warr/warr_to_str.c\
+			math/math_compute.c\
+			math/math_prime.c\
+			io/io_printf.c\
+			io/io_putc.c\
+			io/io_putnb.c\
 
-TSRC	=
+TSRC	=	$(subst .c,_test.c,$(SRC))
 
-SRC	:= $(addprefix src/, $(SRC))
+TSRC 	:= $(addprefix tests/unit_tests/, $(TSRC))
 
-TSRC	:=	$(addprefix tests/unit_tests/, $(TSRC))
+SRC 	:= $(addprefix src/, $(SRC))
 
-# Objects
-
-MAIN_OBJ	=	$(MAIN:.c=.o)
-
-TMAIN_OBJ	=	$(TEST_MAIN:.c=.o)
-
-OBJ	=	$(SRC:.c=.o)
+OBJ		=	$(SRC:.c=.o)
 
 TOBJ	=	$(TSRC:.c=.o)
 
-# Flags
+$(LNAME):	$(OBJ)
+	ar rc $(LNAME) $(OBJ)
 
-CFLAGS	=	-W -Wall -Wextra -pedantic -I./include/
+all: $(LNAME)
 
-LDFLAGS	=	-L./lib/ -lmy
-
-TFLAGS	=	-lcriterion --coverage
-
-# Rules
-
-$(NAME): $(MAIN_OBJ) $(OBJ) lib/libmy.a
-	gcc -o $(NAME) $(MAIN_OBJ) $(OBJ) $(LDFLAGS)
-
-all:	$(NAME)
-
-lib/libmy.a:
-	make -C lib/
-
-clean:
+clean:	tests_clean
 	rm -f $(OBJ)
-	make tests_clean
-	make clean -C lib/
+	rm -f $(LNAME)
+	rm -f $(DNAME)
 
-fclean:	clean
-	make fclean -C lib/
-	rm -f unit_tests
-	rm -f debug_$(NAME)
-	rm -f $(NAME)
+fclean: clean
+	rm -f $(MNAME)
 
-re:	fclean all
+re: clean all
 
-unit_tests: $(OBJ) $(TOBJ) lib/libmy.a
-	gcc -o unit_tests $(OBJ) $(TOBJ) $(LDFLAGS) $(TFLAGS)
+unit_tests: $(OBJ) $(TOBJ)
+	gcc -o unit_tests $(OBJ) $(TOBJ) $(TFLAGS)
 
 tests_run: unit_tests
-	./unit_tests --verbose
+	./unit_tests
 
 tests_clean:
 	rm -f $(TOBJ)
-	rm -f *.gcda
-	rm -f *.gcno
+	rm -f unit_tests
+	rm -f *.gc*
 
-test: $(TMAIN_OBJ) $(OBJ) lib/libmy.a
-	gcc -o $(NAME) $(TMAIN_OBJ) $(OBJ) $(LDFLAGS)
+main: CFLAGS += -g3
+main: fclean $(OBJ)
+	gcc -o $(MNAME) $(OBJ) tests/main.c $(CFLAGS)
 
-lib/libdebug.a:
-	make debug -C lib/
+$(DNAME): CFLAGS += -g3
+$(DNAME): $(OBJ)
+	ar rc $(DNAME) $(OBJ)
+debug: $(DNAME)
 
-debug: CFLAGS += -g
-debug: LDFLAGS := $(subst -lmy,-ldebug,$(LDFLAGS))
-debug:	lib/libdebug.a $(OBJ) $(MAIN_OBJ)
-	gcc -o debug_$(NAME) $(OBJ) $(MAIN_OBJ) $(LDFLAGS)
+val_test: unit_tests
+	valgrind --leak-check=full ./unit_tests
 
-.PHONY: all clean fclean re debug
+.PHONY: all clean fclean re debug tests_run tests_clean
