@@ -43,6 +43,10 @@ int my_str_append(char **str, char c)
     if (!str) {
         return -1;
     }
+    if (!*str) {
+        *str = my_str_alloc(1, c);
+        return *str ? 0 : -1;
+    }
     size = my_strlen(*str);
     new = my_strndup(*str, size + 1);
     if (!new) {

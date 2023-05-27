@@ -9,7 +9,6 @@
 
 int main(void)
 {
-    unsigned int nb = -42;
-    printf("%u\n", nb);
+    my_puts("My LibC");
     return 0;
 }

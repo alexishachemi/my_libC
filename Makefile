@@ -15,6 +15,8 @@ CFLAGS 	+= -I./include/ -W -Wall -Wextra -pedantic
 
 TFLAGS	= -lcriterion --coverage -g3
 
+TPATH	=	tests/unit_tests/
+
 SRC		=	vfstr/my_vfstr.c\
 			vfstr/flags/base_conv_flags.c\
 			vfstr/flags/char_conv_flags.c\
@@ -46,10 +48,12 @@ SRC		=	vfstr/my_vfstr.c\
 			io/io_printf.c\
 			io/io_putc.c\
 			io/io_putnb.c\
+			io/io_fd.c\
+			io/io_file.c\
 
 TSRC	=	$(subst .c,_test.c,$(SRC))
 
-TSRC 	:= $(addprefix tests/unit_tests/, $(TSRC))
+TSRC 	:= $(addprefix $(TPATH), $(TSRC))
 
 SRC 	:= $(addprefix src/, $(SRC))
 
