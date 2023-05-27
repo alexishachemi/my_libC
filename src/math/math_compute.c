@@ -5,6 +5,8 @@
 ** my_compute
 */
 
+#include "mymath.h"
+
 /// @brief Compute the power of a number
 /// @param nb The number to compute
 /// @param power The power to compute
@@ -39,6 +41,19 @@ double my_dpow(double nb, int power)
 int my_sqrt(int nb)
 {
     int i = 0;
+
+    while (i * i < nb) {
+        i++;
+    }
+    return i;
+}
+
+/// @brief Compute the square root of a double
+/// @param nb The double to compute
+/// @return The result of the computation
+double my_dsqrt(double nb)
+{
+    double i = 0;
 
     while (i * i < nb) {
         i++;

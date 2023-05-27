@@ -49,16 +49,16 @@ Test(div_v2, simple)
 Test(get_v2_mag, simple)
 {
     v2_t vector = {3, 4};
-    int mag = get_v2_mag(vector);
+    double mag = get_v2_mag(vector);
 
-    cr_assert_eq(mag, 5);
+    cr_assert_eq(mag, 5, "mag: %f", mag);
 }
 
 Test(get_v2_distance, simple)
 {
     v2_t vector1 = {3, 4};
     v2_t vector2 = {0, 0};
-    float distance = get_v2_distance(vector1, vector2);
+    double distance = get_v2_distance(vector1, vector2);
 
-    cr_assert_eq(distance, 5);
+    cr_assert_eq(distance, 5, "distance: %f", distance);
 }
