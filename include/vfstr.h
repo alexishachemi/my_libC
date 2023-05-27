@@ -25,6 +25,7 @@ char *fstr_s_flag(va_list list);
 char *fstr_x_flag(va_list list);
 char *fstr_p_flag(va_list list);
 char *fstr_capw_flag(va_list list);
+
 char *my_vfstr(const char* format, va_list list);
 
 #endif /* !MY_FSTR_H_ */

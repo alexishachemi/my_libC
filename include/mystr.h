@@ -25,36 +25,39 @@ bool my_str_isnum(char const *str);
 bool my_str_isalnum(char const *str);
 bool my_str_ischarset(const char *str, const char *charset);
 bool my_str_isnumber_charset(const char *str, const char *charset);
-char *my_str_upcase(char *str);
-char *my_str_lowcase(char *str);
-char *my_str_merge(const char *left, const char *right, const char *sep);
-int my_strlen(char const *str);
-char *my_strcat(char *dest, const char *src);
-int my_strcmp(const char *s1, const char *s2);
-char *my_revstr(char *str);
-char *my_strcpy(char *dest, char const *src);
-char *my_strncpy(char *dest, const char *src, int size);
-char *my_str_offset(char *str);
-int my_str_find(const char *str, char c, int start);
 bool my_str_startswith(const char *str, const char *prefix);
 bool my_str_endswith(const char *str, const char *suffix);
+
+char *my_str_upcase(char *str);
+char *my_str_lowcase(char *str);
+char *my_strcat(char *dest, const char *src);
+char *my_revstr(char *str);
+char *my_strcpy(char *dest, char const *src);
+int my_strcmp(const char *s1, const char *s2);
+char *my_str_offset(char *str);
+int my_str_append(char **str, char c);
+bool my_str_clean(char *str, char c, bool hard_clean);
+bool my_str_clean_charset(char *str, const char *charset, bool hard_clean);
+
+char *my_str_merge(const char *left, const char *right, const char *sep);
+int my_strlen(char const *str);
+char *my_strncpy(char *dest, const char *src, int size);
+int my_str_find(const char *str, char c, int start);
 int my_str_contains(const char *str, const char *to_find);
 char *my_strdup(const char *str);
 char *my_str_alloc(int size, char fill_char);
 char *my_strndup(const char *str, int size);
-int my_str_append(char **str, char c);
 char *my_str_extract(const char *str, int start, int finish);
+int my_str_count(const char *str, char c);
+
 char *my_str_replace_delim(const char *str, const char *replace_str,
 int start, int finish);
 char *my_str_replace(const char *str, const char *to_replace,
 const char *replace_str);
+char *my_str_format(const char *format, ...);
 int my_str_to_nb(const char *str, const char *base_str);
 char *my_str_from_nb(int nb, const char *base_str);
-int my_str_count(const char *str, char c);
-char *my_str_format(const char *format, ...);
 char *my_str_from_double(double nb);
 double my_str_to_double(const char *str);
-bool my_str_clean(char *str, char c, bool hard_clean);
-bool my_str_clean_charset(char *str, const char *charset, bool hard_clean);
 
 #endif /* !MYSTR_H_ */
