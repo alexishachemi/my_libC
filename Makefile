@@ -23,6 +23,7 @@ SRC		=	vfstr/my_vfstr.c\
 			vfstr/flags/number_conv_flags.c\
 			list/list_create.c\
 			list/list_handle.c\
+			list/list_pop.c\
 			str/str_alloc.c\
 			str/str_alnum.c\
 			str/str_case.c\
