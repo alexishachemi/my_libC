@@ -5,9 +5,9 @@
 ## Makefile
 ##
 
-NAME	=	mylib
+NAME	=	mylibc
 
-MNAME	=	$(NAME)_main
+MNAME	=	$(NAME)
 
 LNAME 	= 	lib$(NAME).a
 
