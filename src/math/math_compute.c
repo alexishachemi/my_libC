@@ -27,7 +27,7 @@ int my_pow(int nb, int power)
 /// @return The result of the computation
 double my_dpow(double nb, int power)
 {
-    double pow = 0;
+    double pow = 1;
 
     for (int i = 0; i < power; i++) {
         pow *= nb;
